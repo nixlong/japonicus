@@ -1,5 +1,5 @@
 # show gekko verbose (strat info) - gekko must start with -d flag;
-gekkoDebug = 0
+gekkoDebug = 1
 # time window size on days of candlesticks for each evaluation
 deltaDays = 90
 # candle size for gekko backtest in minutes

@@ -1,13 +1,15 @@
-gekkoPath = '$HOME/gekko'
-configFilename = 'example-config.js'
+gekkoPath = '$HOME/workspace/gekko-debug'
+configFilename = 'eos-config.js'
 log_name = 'evolution_gen.csv'
 
 # Hosts list of remote machines running gekko, to distribute evaluation load;
 # option values: path to HOSTS file list OR False;
-RemoteAWS = '../AmazonSetup/hosts'
+#RemoteAWS = '../AmazonSetup/hosts'
+RemoteAWS = false
 
 # Your gekko local URL - CHECK THIS!
 # gekko:3000 stands for the default url at docker-compose scheme of things.
-GekkoURLs = ['http://localhost:3000', 'http://gekko:3000']
+#GekkoURLs = ['http://localhost:3000', 'http://gekko:3000']
+GekkoURLs = ['http://localhost:3000']
 showFailedStrategies = true
 

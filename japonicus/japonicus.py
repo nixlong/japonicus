@@ -59,7 +59,7 @@ def launchWebEvolutionaryInfo():
     webServerProcess = Thread(
         target=webServer.server.run,
         kwargs={
-            'debug': False,
+            'debug': True,
             'host': '0.0.0.0'
         }
     )
@@ -176,6 +176,7 @@ def launchJaponicus(settings, options):
             TargetParameters = promoterz.TOMLutils.TOMLToParameters(TOMLData)
         # RUN ONE EQUAL INSTANCE PER REPEATER NUMBER SETTINGS, SEQUENTIALLY;
         for s in range(options.repeater):
+            print(s)
             gekko_generations(
                 TargetParameters, GenerationMethod,
                 EvaluationMode, settings, options, web=web_server

@@ -20,9 +20,15 @@ def checkInstance(instanceUrl):
 
 
 def httpPost(URL, data={}, Verbose=True):
+    print('post url:')
+    print(URL)
+    print('post data:')
+    print(data)
     try:
         Request = requests.post(URL, json=data)
         Response = json.loads(Request.text)
+        print('Response:')
+        print(Response)
 
     except ConnectionRefusedError:
         print("Error: Gekko comm error! Check your local Gekko instance.")
@@ -31,8 +37,11 @@ def httpPost(URL, data={}, Verbose=True):
         if Verbose:
             print("Error: config failure")
             print(e)
+            print('url:')
             print(URL)
+            print('data:')
             print(data)
+            print('---------------------')
         return False
 
     return Response

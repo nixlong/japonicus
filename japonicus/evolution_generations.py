@@ -94,12 +94,21 @@ def grabDatasets(datasetconf, GekkoURL):
         evaluationDatasets = []
         print("Evaluation dataset not found.")
 
+    print('evolutionDatasets:')
+    print(evolutionDatasets)
+    print(evaluationDatasets)
+
     return evolutionDatasets, evaluationDatasets
 
 
 def gekko_generations(
         TargetParameters, GenerationMethod, EvaluationMode, settings,
         options, web=None):
+
+    print('settings:')
+    print(settings)
+    print(options)
+    print(web)
 
     # --LOAD SETTINGS;
     genconf = makeSettings(settings['generations'])
@@ -108,6 +117,19 @@ def gekko_generations(
     indicatorconf = makeSettings(settings['indicators'])
     backtestconf = makeSettings(settings['backtest'])
     evalbreakconf = makeSettings(settings['evalbreak'])
+
+    print('genconf:')
+    print(genconf)
+    print('globalconf:')
+    print(globalconf)
+    print('datasetconf:')
+    print(datasetconf)
+    print('indicatorconf:')
+    print(indicatorconf)
+    print('backtestconf:')
+    print(backtestconf)
+    print('evalbreakconf:')
+    print(evalbreakconf)
 
     # --APPLY COMMAND LINE GENCONF SETTINGS;
     for parameter in genconf.__dict__.keys():
@@ -169,6 +191,7 @@ def gekko_generations(
     if Strategy:
         Logger.log("Evolving %s strategy;\n" % Strategy)
     Logger.log("evaluated parameters ranges:", target="Header")
+    print(TargetParameters);
     for k in TargetParameters.keys():
         Logger.log(
             "%s%s%s\n" % (k, " " * (30 - len(k)), TargetParameters[k]),
@@ -196,6 +219,7 @@ def gekko_generations(
     GlobalTools.register('Evaluate', Evaluate,
                          GlobalTools.constructPhenotype, backtestconf)
 
+    print('test 1...')
     # --THIS LOADS A DATERANGE FOR A LOCALE;
     if options.benchmarkMode:
         def onInitLocale(World):
@@ -213,6 +237,8 @@ def gekko_generations(
             Dataset = datasetOperations.getLocaleDataset(World)
             return Dataset
 
+    print('test 2...')
+    
     populationLoops = [promoterz.sequence.locale.standard_loop.execute]
     worldLoops = [promoterz.sequence.world.parallel_world.execute]
     World = promoterz.world.World(
@@ -239,6 +265,7 @@ def gekko_generations(
 
     World.logger.updateFile()
 
+    print('test 3...')
     # INITALIZE EVALUATION PROCESSING POOL
     World.parallel = promoterz.evaluationPool.EvaluationPool(
             World.tools.Evaluate,
@@ -246,6 +273,9 @@ def gekko_generations(
             backtestconf.ParallelBacktests,
             genconf.showIndividualEvaluationInfo,
         )
+
+    print('world:')
+    print(World)
 
     # --GENERATE INITIAL LOCALES;
     for l in range(genconf.NBLOCALE):
